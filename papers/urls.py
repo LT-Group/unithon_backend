@@ -1,6 +1,6 @@
 from django.urls import path
 
-from papers.views import GetPaper, SavingPaper, PostPaper, GetPaperDetail, PageCount, QuestionRank
+from papers.views import GetPaper, SavingPaper, PostPaper, GetPaperDetail, PageCount, QuestionRank, CountingPaperUser
 
 app_name = 'papers'
 
@@ -11,4 +11,8 @@ urlpatterns = [
     path('page_count/', PageCount.as_view(), name="page_count"),
     path('saving_paper/', SavingPaper.as_view(), name="saving_paper"),
     path('question_rank/', QuestionRank.as_view(), name= "question_rank"),
+    path('count_paperuser/<int:user_id>/', CountingPaperUser.as_view(), name="count_paperuser")
+
 ]
+
+
