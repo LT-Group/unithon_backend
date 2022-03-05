@@ -23,6 +23,7 @@ class GetUserId(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
+        # 회원가입 시 지정한 username으로 DB에 저장된 user id 를 return
         username = request.GET.get("username", None)
         user = User.objects.filter(username=username)
         if (user):
@@ -35,6 +36,7 @@ class CheckDuplicatedId(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
+        # 아이디 중복확인
         id = request.data['id']
         try:
             user = User.objects.get(username=id)
@@ -49,6 +51,7 @@ class CheckDuplicatedId(APIView):
 class MyProfile(APIView):
 
     def get(self, request, user_id):
+        # 내 프로필에 들어가는 정보 (푼 시험지 수, 푼 시험지 목록, 전체 시험 평균, 받은 도장 수)
         user = User.objects.get(pk=user_id)
         # 푼 시험지 전체 queryset
         paper_user_queryset = PaperUser.objects.filter(user=user).order_by('id')

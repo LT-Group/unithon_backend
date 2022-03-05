@@ -13,6 +13,7 @@ from papers.models import Paper, PaperUser, Question, QuestionUser
 
 class GetPaper(APIView):
     def get(self, request, user_id):
+        # 시험지에 대한 정보 (유저가 푼 시험지를 제외하고 남은 문제 중에서 랜덤 추출)
         user = User.objects.get(pk=user_id)
 
         #유저가 푼 시험 수
@@ -48,12 +49,13 @@ class GetPaper(APIView):
 
 class PostPaper(APIView):
     def post(self, request):
+        # 시험지 제출 -> 채점하여 return, 점수를 저장하고 question에 대한 통계 업데이트
         data = request.data
         user = User.objects.get(pk=data['user_id'])
         paper = Paper.objects.get(pk=data['paper_id'])
         question_list = paper.question.order_by('pk')
 
-        paper_user = PaperUser.objects.create(user=user,paper=paper)
+        paper_user = PaperUser.objects.create(user=user, paper=paper)
 
         # 채점
         is_correct = []
@@ -89,6 +91,7 @@ class PostPaper(APIView):
 
 class GetPaperDetail(APIView):
     def get(self, request, user_id, paper_id):
+        # 마이페이지에서 자신이 풀었던 시험지의 내용을 보는 데에 사용
         user = User.objects.get(pk=user_id)
         paper = Paper.objects.get(pk=paper_id)
 
@@ -122,10 +125,11 @@ class GetPaperDetail(APIView):
         })
 
 
-class PageCount(APIView):
+class PaperCount(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
+        #전체 시험지 수 : 메인 페이지에서 몇 개의 시험이 풀려졌는지 보는 용도
         return Response({"page_count": PaperUser.objects.count()})
 
 
@@ -133,6 +137,7 @@ class QuestionRank(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
+        # 오답률 랭킹
         question_list = Question.objects.order_by('-wrong_answer_rate')[:10]
 
         ranking_list = []
@@ -150,6 +155,7 @@ class QuestionRank(APIView):
 
 class SavingPaper(APIView):
     def post(self, request):
+        # 자동으로 시험지 등록하는 용도 (테스트 서버에서 사용하기 위함, 리셋을 대비하여 만들어놨음)
         for data in request.data:
             paper = Paper.objects.create()
             for answer in data:
@@ -159,6 +165,7 @@ class SavingPaper(APIView):
 
 class CountingPaperUser(APIView):
     def get(self, request, user_id):
+        # 내가 푼 시험지의 수 고객에게 몇 회차 째의 시험인지 알려주기 위함
         user = User.objects.get(pk=user_id)
         count_paperuser = PaperUser.objects.filter(user=user).count()
 
