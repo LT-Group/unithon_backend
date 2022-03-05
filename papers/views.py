@@ -152,3 +152,10 @@ class SavingPaper(APIView):
             for answer in data:
                 Question.objects.create(paper=paper, answer=answer)
         return Response(True)
+
+
+class CountingPaperUser(APIView):
+    def get(self, request, user_id):
+        user = User.objects.get(pk=user_id)
+        count_paperuser = PaperUser.objects.filter(user=user).count()
+        return Response(dict(count_paperuser=count_paperuser))
