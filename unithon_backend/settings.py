@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure-rau3z$hqv9stkd1=nlun&*5vm+vo!51t9loc#*(0ixj_!s#an$
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['unithon-hack.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'unithon-hack.herokuapp.com',
+    '127.0.0.1',
+    'https://grammer-survive.netlify.app',
+]
 
 
 # Application definition
@@ -184,6 +188,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:3000',
     'http://localhost:3000',
+    'https://grammer-survive.netlify.app',
 ]
 CORS_ALLOW_CREDENTIALS = True
 
