@@ -61,7 +61,7 @@ class MyProfile(APIView):
         else :
             total_score_avg = None
         # 푼 시험지 id 목록
-        paper_list = paper_user_queryset.values_list('id', flat=True)
+        paper_list = paper_user_queryset.values_list('paper__id', flat=True)
         # 도장 개수
         stamp_counts = [0, 0, 0]
         for paper_user in paper_user_queryset:
