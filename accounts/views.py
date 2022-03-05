@@ -67,7 +67,7 @@ class MyProfile(APIView):
         for paper_user in paper_user_queryset:
             if (paper_user.total_score >= 80) :
                 stamp_counts[0] += 1
-            elif (paper_user.total_score >= 50) :
+            elif (paper_user.total_score >= 60) :
                 stamp_counts[1] += 1
             else :
                 stamp_counts[2] += 1
