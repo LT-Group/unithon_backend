@@ -110,7 +110,7 @@ class GetPaperDetail(APIView):
 
         return Response({
             "username": user.username,
-            # "created_at": paper_user.created_at.strftime("%Y-%m-%d"),
+            "created_at": paper_user.created_at.strftime("%Y-%m-%d"),
             "score": paper_user.total_score,
             "is_correct_list": is_correct_list,
             "answer_user": answer_user,
@@ -118,7 +118,9 @@ class GetPaperDetail(APIView):
         })
 
 
-
+class PageCount(APIView):
+    def get(self, request):
+        return Response({"page_count": PaperUser.objects.count()})
 
 class SavingPaper(APIView):
     def post(self, request):
