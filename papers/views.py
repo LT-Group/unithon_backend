@@ -45,6 +45,7 @@ class GetPaper(APIView):
 
         return Response({"result": "None_Paper_Left"})
 
+
 class PostPaper(APIView):
     def post(self, request):
         data = request.data
@@ -84,6 +85,7 @@ class PostPaper(APIView):
             "answer": answer_list
         }
         return Response(result)
+
 
 class GetPaperDetail(APIView):
     def get(self, request, user_id, paper_id):
@@ -126,6 +128,7 @@ class PageCount(APIView):
     def get(self, request):
         return Response({"page_count": PaperUser.objects.count()})
 
+
 class QuestionRank(APIView):
     permission_classes = [AllowAny]
 
@@ -152,3 +155,11 @@ class SavingPaper(APIView):
             for answer in data:
                 Question.objects.create(paper=paper, answer=answer)
         return Response(True)
+
+
+class CountingPaperUser(APIView):
+    def get(self, request, user_id):
+        user = User.objects.get(pk=user_id)
+        count_paperuser = PaperUser.objects.filter(user=user).count()
+
+        return Response(dict(count_paperuser=count_paperuser))

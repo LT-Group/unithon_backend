@@ -45,6 +45,7 @@ class CheckDuplicatedId(APIView):
         except:
             return Response(dict(result=False))
 
+
 class MyProfile(APIView):
 
     def get(self, request, user_id):
