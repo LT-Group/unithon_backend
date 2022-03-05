@@ -31,7 +31,7 @@ class CustomAccountManager(BaseUserManager):
 class User(AbstractUser):
 
     username = models.CharField(max_length=10, unique=True)
-    password = models.CharField('비밀번호', max_length=15)
+    password = models.CharField('비밀번호', max_length=200)
 
     objects = CustomAccountManager()
 

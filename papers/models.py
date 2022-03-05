@@ -8,6 +8,7 @@ class Paper(models.Model):
     test_audio_file = models.FileField(upload_to='test_audio_file/%Y/%m/%d', null=True, blank=True, help_text="테스트 음성파일")
 
 
+
 class PaperUser(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='paper_user')
     paper = models.ForeignKey('papers.Paper', help_text='시험', on_delete=models.CASCADE, related_name='paper_user')
