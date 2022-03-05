@@ -49,8 +49,8 @@ class GetPaper(APIView):
 class PostPaper(APIView):
     def post(self, request):
         data = request.data
-        user = User.objects.get(pk=data['user'])
-        paper = Paper.objects.get(pk=data['paper'])
+        user = User.objects.get(pk=data['user_id'])
+        paper = Paper.objects.get(pk=data['paper_id'])
         question_list = paper.question.order_by('pk')
 
         paper_user = PaperUser.objects.create(user=user,paper=paper)
