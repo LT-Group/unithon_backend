@@ -19,6 +19,17 @@ class CustomUserCreate(APIView):
                 return Response(status=status.HTTP_201_CREATED)
         return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class GetUserId(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        username = request.GET.get("username", None)
+        user = User.objects.filter(username=username)
+        if (user):
+            return Response({"user_id" : user[0].id})
+        else :
+            return Response({"user_id": "None user found"})
+
 
 class CheckDuplicatedId(APIView):
     permission_classes = [AllowAny]
