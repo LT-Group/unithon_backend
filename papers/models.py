@@ -5,7 +5,7 @@ from unithon_backend import settings
 
 
 class Paper(models.Model):
-    test_audio_file = models.FileField(upload_to='test_audio_file/%Y/%m/%d', help_text="테스트 음성파일")
+    test_audio_file = models.FileField(upload_to='test_audio_file/%Y/%m/%d', null=True, blank=True, help_text="테스트 음성파일")
 
 
 class PaperUser(models.Model):
