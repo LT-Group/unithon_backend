@@ -37,7 +37,7 @@ class CheckDuplicatedId(APIView):
     def post(self, request):
         id = request.data['id']
         try:
-            user = User.objects.get(user_id=id)
+            user = User.objects.get(username=id)
             if (user):
                 return Response(dict(result=True))
             else:
@@ -52,6 +52,11 @@ class MyProfile(APIView):
         user = User.objects.get(pk=user_id)
         # 푼 시험지 전체 queryset
         paper_user_queryset = PaperUser.objects.filter(user=user).order_by('id')
+        total_score_list = list(paper_user_queryset.values_list('total_score', flat=True))
+        if (total_score_list):
+            total_score_avg = int((sum(total_score_list))/len(total_score_list))
+        else :
+            total_score_avg = None
         # 푼 시험지 id 목록
         paper_list = paper_user_queryset.values_list('id', flat=True)
         # 도장 개수
@@ -66,6 +71,7 @@ class MyProfile(APIView):
 
         result = {
             "username": user.username,
+            "total_score_avg": total_score_avg,
             "paper_count": paper_user_queryset.count(),
             "paper_list" : paper_list,
             "stamp_counts": stamp_counts
