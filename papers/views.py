@@ -120,11 +120,29 @@ class GetPaperDetail(APIView):
 
 
 class PageCount(APIView):
-
     permission_classes = [AllowAny]
 
     def get(self, request):
         return Response({"page_count": PaperUser.objects.count()})
+
+class QuestionRank(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        question_list = Question.objects.order_by('-wrong_answer_rate')[:10]
+
+        ranking_list = []
+        i = 0
+        for question in question_list:
+            i += 1
+            ranking_list.append({
+                "rank": i,
+                "question": question.answer,
+                "wrong_answer_rate" : round(question.wrong_answer_rate * 100 , 1)
+            })
+
+        return Response(ranking_list)
+
 
 class SavingPaper(APIView):
     def post(self, request):
