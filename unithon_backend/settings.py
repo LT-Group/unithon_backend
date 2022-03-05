@@ -131,7 +131,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-AWS_MEDIA_URL = 'https://unithon-hack.herokuapp.com'
+AWS_MEDIA_URL = 'https://unithon-hack.herokuapp.com/'
 
 #rest fromework 설정
 REST_FRAMEWORK = {
