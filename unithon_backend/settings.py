@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-rau3z$hqv9stkd1=nlun&*5vm+vo!51t9loc#*(0ixj_!s#an$
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['unithon-test.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['unithon-hack.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
