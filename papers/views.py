@@ -62,7 +62,16 @@ class PostPaper(APIView):
         answer_list = []
         score = 0
         for i in range(0,5):
-            user_answer = data['answer'][i].split()
+            user_answer = data['answer'][i].replace(',', '')
+            user_answer = user_answer.replace('?', '')
+            user_answer = user_answer.replace('!', '')
+            user_answer = user_answer.replace('.', '')
+            user_answer = user_answer.replace(')', '')
+            user_answer = user_answer.replace('(', '')
+            user_answer = user_answer.replace('/', '')
+            user_answer = user_answer.replace('~', '')
+            user_answer = user_answer.replace('-', '')
+            user_answer = user_answer.split()
             answer = question_list[i].answer.split(' ')
             answer_list.append(question_list[i].answer)
             if (user_answer==answer):
