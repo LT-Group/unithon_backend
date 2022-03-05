@@ -161,4 +161,5 @@ class CountingPaperUser(APIView):
     def get(self, request, user_id):
         user = User.objects.get(pk=user_id)
         count_paperuser = PaperUser.objects.filter(user=user).count()
+
         return Response(dict(count_paperuser=count_paperuser))
