@@ -130,7 +130,7 @@ class PaperCount(APIView):
 
     def get(self, request):
         #전체 시험지 수 : 메인 페이지에서 몇 개의 시험이 풀려졌는지 보는 용도
-        return Response({"page_count": PaperUser.objects.count()})
+        return Response({"paper_count": PaperUser.objects.count()})
 
 
 class QuestionRank(APIView):
