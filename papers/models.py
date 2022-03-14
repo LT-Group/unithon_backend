@@ -7,6 +7,7 @@ from unithon_backend import settings
 class Paper(models.Model):
     test_audio_file = models.FileField(upload_to='test_audio_file/%Y/%m/%d', null=True, blank=True, help_text="테스트 음성파일")
     created_at = models.DateTimeField(auto_now_add=True)
+    url = models.URLField(blank=True)
 
 
 class PaperUser(models.Model):

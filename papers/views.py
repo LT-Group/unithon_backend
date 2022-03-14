@@ -33,15 +33,15 @@ class GetPaper(APIView):
         if (paper_left):
             n = random.randint(0, paper_left-1)
             paper = paper_queryset[n]
-            if paper.test_audio_file:
-                file_url = str(settings.AWS_MEDIA_URL + paper.test_audio_file.url)
+            if paper.url:
+                url = paper.url
             else :
-                file_url = None
+                url = None
             #시험지 id 와
             return Response({
                 "paper_id": paper.id,
                 "user_paper_queryset" : user_paper_count + 1,
-                "file": file_url
+                "file": url
             })
 
         return Response({"result": "None_Paper_Left"})
