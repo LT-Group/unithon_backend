@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-rau3z$hqv9stkd1=nlun&*5vm+vo!51t9loc#*(0ixj_!s#an$
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'unithon-hack.herokuapp.com',
