@@ -33,6 +33,7 @@ class GetPaper(APIView):
         if (paper_left):
             n = random.randint(0, paper_left-1)
             paper = paper_queryset[n]
+            question_url_list = paper.question.order_by('pk').values_list('sound_url', flat=True)
             if paper.url:
                 url = paper.url
             else :
@@ -41,7 +42,8 @@ class GetPaper(APIView):
             return Response({
                 "paper_id": paper.id,
                 "user_paper_queryset" : user_paper_count + 1,
-                "file": url
+                "file": url,
+                "question_url_list": question_url_list
             })
 
         return Response({"result": "None_Paper_Left"})

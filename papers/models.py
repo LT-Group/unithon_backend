@@ -23,6 +23,7 @@ class Question(models.Model):
     solved_count = models.IntegerField(help_text='푼 사람 수', default=0)
     wrong_count = models.IntegerField(help_text='틀린 사람 수', default=0)
     wrong_answer_rate = models.FloatField(help_text='오답률', default=0)
+    sound_url = models.URLField(blank=True)
 
 
 class QuestionUser(models.Model):
